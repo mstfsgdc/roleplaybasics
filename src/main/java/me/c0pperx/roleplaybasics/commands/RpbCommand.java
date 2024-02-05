@@ -20,19 +20,8 @@ public class RpbCommand implements CommandExecutor {
             return true;
         }
         if(args[0].equalsIgnoreCase("reload")) {
-            if(sender.hasPermission("roleplaybasics.reload")) {
-                this.plugin.reloadConfig();
-                sender.sendMessage(ChatColor.RED + "[RolePlayBasics]" + ChatColor.RESET + " Plugin successfully reloaded.");
-            } else {
-                String permMessage = this.plugin.getConfig().getString("permission-message");
-
-                if(permMessage != null) {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', permMessage));
-                } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[RolePlayBasics]&r You do not have the necessary permission to use this command."));
-                }
-                return true;
-            }
+            this.plugin.reloadConfig();
+            sender.sendMessage(ChatColor.RED + "[RolePlayBasics]" + ChatColor.RESET + " Plugin successfully reloaded.");
         }
         return true;
     }

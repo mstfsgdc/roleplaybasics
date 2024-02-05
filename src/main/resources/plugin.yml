@@ -13,6 +13,7 @@ commands:
   roleplaybasics:
     description: Role Play Basics command.
     usage: /command <reload>
+    permission: roleplaybasics.admin
     aliases:
       - rpb
 permissions:
@@ -22,6 +23,6 @@ permissions:
   roleplaybasics.do:
     description: Allows the usage of the /do command.
     default: true
-  roleplaybasics.reload:
-    description: Reloads the plugin.
+  roleplaybasics.admin:
+    description: Allows the usage of the /roleplaybasics command.
     default: op
