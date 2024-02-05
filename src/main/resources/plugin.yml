@@ -1,0 +1,27 @@
+name: RolePlayBasics
+version: '${project.version}'
+main: me.c0pperx.roleplaybasics.RolePlayBasics
+api-version: '1.20'
+author: 'c0pperX'
+commands:
+  me:
+    description: Sends an emote message to players within a range of configured distance. (Default 30 blocks)
+    usage: /<command> <message>
+  do:
+    description: Sends an emote message to players within a range of configured distance. (Default 30 blocks)
+    usage: /<command> <message>
+  roleplaybasics:
+    description: Role Play Basics command.
+    usage: /command <reload>
+    aliases:
+      - rpb
+permissions:
+  roleplaybasics.me:
+    description: Allows the usage of the /me command.
+    default: true
+  roleplaybasics.do:
+    description: Allows the usage of the /do command.
+    default: true
+  roleplaybasics.reload:
+    description: Reloads the plugin.
+    default: op

@@ -1,0 +1,11 @@
+##########################################
+# Role Play Basics Plugin Configurations #
+##########################################
+
+# Emote Commands
+emote-message-distance: 30
+
+# Messages
+permission-message: "&c[RolePlayBasics]&r You do not have the necessary permission to use this command."
+player-instance-message: "&c[RolePlayBasics]&r This command can only be used by players."
+syntax-message: "&c[RolePlayBasics]&r Syntax: /%cmd% <message>" # Placeholder(s): %cmd%
