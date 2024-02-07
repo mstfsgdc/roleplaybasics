@@ -1,8 +1,6 @@
 package me.c0pperx.roleplaybasics;
 
-import me.c0pperx.roleplaybasics.commands.DoCommand;
-import me.c0pperx.roleplaybasics.commands.MeCommand;
-import me.c0pperx.roleplaybasics.commands.RpbCommand;
+import me.c0pperx.roleplaybasics.commands.*;
 import me.c0pperx.roleplaybasics.tabcompletion.RpbTabCompletion;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +20,9 @@ public final class RolePlayBasics extends JavaPlugin {
         getCommand("me").setExecutor(new MeCommand(this));
         getCommand("do").setExecutor(new DoCommand(this));
         getCommand("roleplaybasics").setExecutor(new RpbCommand(this));
+        getCommand("local").setExecutor(new LocalCommand(this));
+        getCommand("shout").setExecutor(new ShoutCommand(this));
+        getCommand("whisper").setExecutor(new WhisperCommand(this));
 
         // Tab Completions
         getCommand("roleplaybasics").setTabCompleter(new RpbTabCompletion());

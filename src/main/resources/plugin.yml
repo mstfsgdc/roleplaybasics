@@ -5,10 +5,10 @@ api-version: '1.20'
 author: 'c0pperX'
 commands:
   me:
-    description: Sends an emote message to players within a range of configured distance. (Default 30 blocks)
+    description: Sends an emote message to players within a range of specific distance. (Default 30 blocks)
     usage: /<command> <message>
   do:
-    description: Sends an emote message to players within a range of configured distance. (Default 30 blocks)
+    description: Sends an emote message to players within a range of specific distance. (Default 30 blocks)
     usage: /<command> <message>
   roleplaybasics:
     description: Role Play Basics command.
@@ -16,6 +16,21 @@ commands:
     permission: roleplaybasics.admin
     aliases:
       - rpb
+  local:
+    description: Sends an local chat message to players within a range of specific distance. (Default 30 blocks)
+    usage: /<command> <message>
+    aliases:
+      - l
+  shout:
+    description: Sends an shout chat message to players within a range of specific distance. (Default 45 blocks)
+    usage: /<command> <message>
+    aliases:
+      - s
+  whisper:
+    description: Sends an whisper chat message to players within a range of specific distance. (Default 5 blocks)
+    usage: /<command> <message>
+    aliases:
+      - w
 permissions:
   roleplaybasics.me:
     description: Allows the usage of the /me command.
@@ -26,3 +41,12 @@ permissions:
   roleplaybasics.admin:
     description: Allows the usage of the /roleplaybasics command.
     default: op
+  roleplaybasics.local:
+    description: Allows the usage of the /local command.
+    default: true
+  roleplaybasics.shout:
+    description: Allows the usage of the /shout command.
+    default: true
+  roleplaybasics.whisper:
+    description: Allows the usage of the /whisper command.
+    default: true

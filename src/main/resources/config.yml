@@ -2,8 +2,17 @@
 # Role Play Basics Plugin Configurations #
 ##########################################
 
-# Emote Commands
+# Chat Commands
 emote-message-distance: 30
+chat-distance: 30
+
+# Chat Colors
+local-message-color: "&f"
+local-distance-message-color: "&7"
+shout-message-color: "&3"
+shout-distance-message-color: "&9"
+whisper-message-color: "&7"
+whisper-distance-message-color: "&8"
 
 # Messages
 permission-message: "&c[RolePlayBasics]&r You do not have the necessary permission to use this command."
