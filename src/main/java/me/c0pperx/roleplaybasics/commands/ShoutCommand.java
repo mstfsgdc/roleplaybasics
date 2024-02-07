@@ -53,6 +53,10 @@ public class ShoutCommand implements CommandExecutor {
         }
         String message = messageBuilder.toString().trim();
 
+        boolean AutoPunctuation = this.plugin.getConfig().getBoolean("auto-punctuation");
+        char lastChar = message.charAt(message.length() - 1);
+        if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '!';
+
         Player player = (Player) sender;
         String playerName = player.getDisplayName();
         int messageDistance = this.plugin.getConfig().getInt("chat-distance");
