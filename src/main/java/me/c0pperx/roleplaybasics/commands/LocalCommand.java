@@ -40,7 +40,7 @@ public class LocalCommand implements CommandExecutor {
 
         if (args.length == 0) {
             String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
-            if(syntaxMessage == null || syntaxMessage.length() <= 0) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
+            if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
             syntaxMessage = syntaxMessage.replace("%cmd%", "local");
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
@@ -65,11 +65,12 @@ public class LocalCommand implements CommandExecutor {
         String localColor = this.plugin.getConfig().getString("local-message-color");
         String localDistanceColor = this.plugin.getConfig().getString("local-distance-message-color");
 
+
         for(Player nearbyPlayer : player.getWorld().getPlayers()) {
             if(nearbyPlayer.getLocation().distance(player.getLocation()) <= Math.round((float) messageDistance / 2)) {
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', localColor) + "[L]" + playerName + ": " + message);
+                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', localColor != null ? localColor : "&f") + "[L]" + playerName + ": " + message);
             } else if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance){
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', localDistanceColor) + "[L]" + playerName + ": " + message);
+                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', localDistanceColor != null ? localDistanceColor : "&7") + "[L]" + playerName + ": " + message);
             }
         }
         return true;

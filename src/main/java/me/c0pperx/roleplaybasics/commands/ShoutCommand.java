@@ -40,7 +40,7 @@ public class ShoutCommand implements CommandExecutor {
 
         if (args.length == 0) {
             String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
-            if(syntaxMessage == null || syntaxMessage.length() <= 0) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
+            if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
             syntaxMessage = syntaxMessage.replace("%cmd%", "shout");
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
@@ -67,9 +67,9 @@ public class ShoutCommand implements CommandExecutor {
 
         for(Player nearbyPlayer : player.getWorld().getPlayers()) {
             if(nearbyPlayer.getLocation().distance(player.getLocation()) <= Math.round((float) messageDistance / 2)) {
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', shoutColor) + "[S]" + playerName + ": " + message);
+                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', shoutColor != null ? shoutColor : "&3") + "[S]" + playerName + ": " + message);
             } else if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance){
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', shoutDistanceColor) + "[S]" + playerName + ": " + message);
+                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', shoutDistanceColor != null ? shoutDistanceColor : "&9") + "[S]" + playerName + ": " + message);
             }
         }
         return true;

@@ -40,7 +40,7 @@ public class WhisperCommand implements CommandExecutor {
 
         if (args.length == 0) {
             String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
-            if(syntaxMessage == null || syntaxMessage.length() <= 0) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
+            if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
             syntaxMessage = syntaxMessage.replace("%cmd%", "whisper");
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
@@ -67,9 +67,9 @@ public class WhisperCommand implements CommandExecutor {
 
         for(Player nearbyPlayer : player.getWorld().getPlayers()) {
             if(nearbyPlayer.getLocation().distance(player.getLocation()) <= Math.round((float) messageDistance / 2)) {
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', whisperColor) + "[W]" + playerName + ": " + message);
+                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', whisperColor != null ? whisperColor : "&7") + "[W]" + playerName + ": " + message);
             } else if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance){
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', whisperDistanceColor) + "[W]" + playerName + ": " + message);
+                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', whisperDistanceColor != null ? whisperDistanceColor : "&8") + "[W]" + playerName + ": " + message);
             }
         }
         return true;
