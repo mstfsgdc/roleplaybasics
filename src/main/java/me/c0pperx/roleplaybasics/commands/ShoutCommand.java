@@ -1,6 +1,7 @@
 package me.c0pperx.roleplaybasics.commands;
 
 import me.c0pperx.roleplaybasics.RolePlayBasics;
+import me.c0pperx.roleplaybasics.functions.CommandHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -38,14 +39,7 @@ public class ShoutCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0) {
-            String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
-            if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
-            syntaxMessage = syntaxMessage.replace("%cmd%", "shout");
-
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
-            return true;
-        }
+        if(CommandHelper.PlayerCheck(sender, this.plugin)) return true;
 
         StringBuilder messageBuilder = new StringBuilder();
         for (String arg : args) {

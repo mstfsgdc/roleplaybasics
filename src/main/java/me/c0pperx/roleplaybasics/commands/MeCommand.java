@@ -1,6 +1,7 @@
 package me.c0pperx.roleplaybasics.commands;
 
 import me.c0pperx.roleplaybasics.RolePlayBasics;
+import me.c0pperx.roleplaybasics.functions.CommandHelper;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,20 +28,11 @@ public class MeCommand implements CommandExecutor {
             return true;
         }
 
-        if(!(sender instanceof Player)) {
-            String instanceMessage = this.plugin.getConfig().getString("player-instance-message");
-
-            if(instanceMessage != null) {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', instanceMessage));
-            } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[RolePlayBasics]&r This command can only be used by players."));
-            }
-            return true;
-        }
+        if(CommandHelper.PlayerCheck(sender, this.plugin)) return true;
 
         if (args.length == 0) {
             String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
-            if(syntaxMessage == null || syntaxMessage.length() <= 0) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
+            if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
             syntaxMessage = syntaxMessage.replace("%cmd%", "me");
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
