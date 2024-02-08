@@ -59,9 +59,8 @@ public class ShoutCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         String playerName = player.getDisplayName();
-        int messageDistance = this.plugin.getConfig().getInt("chat-distance");
+        int messageDistance = this.plugin.getConfig().getInt("shout-chat-distance");
         if(messageDistance <= 0) messageDistance = 30;
-        messageDistance = (int) (messageDistance * 1.5);
 
         String shoutColor = this.plugin.getConfig().getString("shout-message-color");
         String shoutDistanceColor = this.plugin.getConfig().getString("shout-distance-message-color");

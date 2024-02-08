@@ -3,8 +3,10 @@
 ##########################################
 
 # Chat Commands
-emote-message-distance: 30 # blocks
-chat-distance: 30 # blocks
+emote-message-distance: 15 # blocks
+local-chat-distance: 15 # blocks
+shout-chat-distance: 30 # blocks
+whisper-chat-distance: 3 # blocks
 auto-punctuation: true # true/false
 
 # Chat Colors

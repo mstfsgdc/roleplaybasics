@@ -59,8 +59,8 @@ public class LocalCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         String playerName = player.getDisplayName();
-        int messageDistance = this.plugin.getConfig().getInt("chat-distance");
-        if(messageDistance <= 0) messageDistance = 30;
+        int messageDistance = this.plugin.getConfig().getInt("local-chat-distance");
+        if(messageDistance <= 0) messageDistance = 15;
 
         String localColor = this.plugin.getConfig().getString("local-message-color");
         String localDistanceColor = this.plugin.getConfig().getString("local-distance-message-color");

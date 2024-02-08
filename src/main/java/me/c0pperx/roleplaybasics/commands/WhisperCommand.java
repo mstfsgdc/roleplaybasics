@@ -59,9 +59,8 @@ public class WhisperCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         String playerName = player.getDisplayName();
-        int messageDistance = this.plugin.getConfig().getInt("chat-distance");
-        if(messageDistance <= 0) messageDistance = 30;
-        messageDistance = (int) (messageDistance / 6);
+        int messageDistance = this.plugin.getConfig().getInt("whisper-chat-distance");
+        if(messageDistance <= 0) messageDistance = 3;
 
         String whisperColor = this.plugin.getConfig().getString("whisper-message-color");
         String whisperDistanceColor = this.plugin.getConfig().getString("whisper-distance-message-color");
