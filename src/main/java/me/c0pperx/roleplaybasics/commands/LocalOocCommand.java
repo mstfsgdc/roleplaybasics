@@ -8,16 +8,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ShoutCommand implements CommandExecutor {
+public class LocalOocCommand implements CommandExecutor {
     private final RolePlayBasics plugin;
 
-    public ShoutCommand(RolePlayBasics plugin) {
+    public LocalOocCommand(RolePlayBasics plugin) {
         this.plugin = plugin;
     }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!sender.hasPermission("roleplaybasics.shout")) {
+        if(!sender.hasPermission("roleplaybasics.localooc")) {
             String permMessage = this.plugin.getConfig().getString("permission-message");
 
             if(permMessage != null) {
@@ -28,18 +27,16 @@ public class ShoutCommand implements CommandExecutor {
             return true;
         }
 
-        if(!(sender instanceof Player)) {
-            String instanceMessage = this.plugin.getConfig().getString("player-instance-message");
+        if(CommandHelper.PlayerCheck(sender, this.plugin)) return true;
 
-            if(instanceMessage != null) {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', instanceMessage));
-            } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[RolePlayBasics]&r This command can only be used by players."));
-            }
+        if (args.length == 0) {
+            String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
+            if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
+            syntaxMessage = syntaxMessage.replace("%cmd%", "localooc");
+
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
             return true;
         }
-
-        if(CommandHelper.PlayerCheck(sender, this.plugin)) return true;
 
         StringBuilder messageBuilder = new StringBuilder();
         for (String arg : args) {
@@ -49,23 +46,21 @@ public class ShoutCommand implements CommandExecutor {
 
         boolean AutoPunctuation = this.plugin.getConfig().getBoolean("auto-punctuation");
         char lastChar = message.charAt(message.length() - 1);
-        if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '!';
+        if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '.';
 
         Player player = (Player) sender;
         String playerName = player.getDisplayName();
-        int messageDistance = this.plugin.getConfig().getInt("shout-chat-distance");
-        if(messageDistance <= 0) messageDistance = 30;
 
-        String shoutColor = this.plugin.getConfig().getString("shout-message-color");
-        String shoutDistanceColor = this.plugin.getConfig().getString("shout-distance-message-color");
+        int messageDistance = this.plugin.getConfig().getInt("local-chat-distance");
+        if(messageDistance <= 0) messageDistance = 15;
+
+        String localOocColor = this.plugin.getConfig().getString("localooc-message-color");
+
 
         for(Player nearbyPlayer : player.getWorld().getPlayers()) {
             if(nearbyPlayer.getLocation().distance(player.getLocation()) <= Math.round((float) messageDistance / 2)) {
-                String color = ChatColor.translateAlternateColorCodes('&', shoutColor != null ? shoutColor : "&3");
-                nearbyPlayer.sendMessage( color + "[S]" + playerName + ": "+ color + message);
-            } else if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance){
-                String distanceColor = ChatColor.translateAlternateColorCodes('&', shoutDistanceColor != null ? shoutDistanceColor : "&9");
-                nearbyPlayer.sendMessage( distanceColor + "[S]" + playerName + ": "+ distanceColor + message);
+                String color = ChatColor.translateAlternateColorCodes('&', localOocColor != null ? localOocColor : "&5");
+                nearbyPlayer.sendMessage(color + "[LOOC]" + playerName + ": " + color + message);
             }
         }
         return true;

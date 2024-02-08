@@ -16,6 +16,8 @@ shout-message-color: "&3"
 shout-distance-message-color: "&9"
 whisper-message-color: "&7"
 whisper-distance-message-color: "&8"
+localooc-message-color: "&5"
+ooc-message-color: "&d"
 
 # Messages
 permission-message: "&c[RolePlayBasics]&r You do not have the necessary permission to use this command."

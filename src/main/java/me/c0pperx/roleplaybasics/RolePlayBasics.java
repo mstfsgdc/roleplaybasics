@@ -23,6 +23,8 @@ public final class RolePlayBasics extends JavaPlugin {
         getCommand("local").setExecutor(new LocalCommand(this));
         getCommand("shout").setExecutor(new ShoutCommand(this));
         getCommand("whisper").setExecutor(new WhisperCommand(this));
+        getCommand("localooc").setExecutor(new LocalOocCommand(this));
+        getCommand("ooc").setExecutor(new OocCommand(this));
 
         // Tab Completions
         getCommand("roleplaybasics").setTabCompleter(new RpbTabCompletion());

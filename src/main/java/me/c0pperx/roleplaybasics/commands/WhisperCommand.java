@@ -59,9 +59,11 @@ public class WhisperCommand implements CommandExecutor {
 
         for(Player nearbyPlayer : player.getWorld().getPlayers()) {
             if(nearbyPlayer.getLocation().distance(player.getLocation()) <= Math.round((float) messageDistance / 2)) {
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', whisperColor != null ? whisperColor : "&7") + "[W]" + playerName + ": " + message);
+                String color = ChatColor.translateAlternateColorCodes('&', whisperColor != null ? whisperColor : "&7");
+                nearbyPlayer.sendMessage(color + "[W]" + playerName + ": " + color + message);
             } else if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance){
-                nearbyPlayer.sendMessage(ChatColor.translateAlternateColorCodes('&', whisperDistanceColor != null ? whisperDistanceColor : "&8") + "[W]" + playerName + ": " + message);
+                String distanceColor = ChatColor.translateAlternateColorCodes('&', whisperDistanceColor != null ? whisperDistanceColor : "&8");
+                nearbyPlayer.sendMessage( distanceColor + "[W]" + playerName + ": " + distanceColor + message);
             }
         }
         return true;

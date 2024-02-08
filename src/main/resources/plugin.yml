@@ -31,6 +31,17 @@ commands:
     usage: /<command> <message>
     aliases:
       - w
+  localooc:
+    description: Sends an local OOC chat message to players within a range of specific distance. (Same with /local)
+    usage: /<command> <message>
+    aliases:
+      - looc
+      - lb
+  ooc:
+    description: Sends an OOC chat message to all players in the same world.
+    usage: /<command> <message>
+    aliases:
+      - b
 permissions:
   roleplaybasics.me:
     description: Allows the usage of the /me command.
@@ -49,4 +60,10 @@ permissions:
     default: true
   roleplaybasics.whisper:
     description: Allows the usage of the /whisper command.
+    default: true
+  roleplaybasics.localooc:
+    description: Allows the usage of the /localooc command.
+    default: true
+  roleplaybasics.ooc:
+    description: Allows the usage of the /ooc command.
     default: true

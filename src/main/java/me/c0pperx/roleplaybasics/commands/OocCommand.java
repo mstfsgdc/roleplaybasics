@@ -2,22 +2,24 @@ package me.c0pperx.roleplaybasics.commands;
 
 import me.c0pperx.roleplaybasics.RolePlayBasics;
 import me.c0pperx.roleplaybasics.functions.CommandHelper;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class LocalCommand implements CommandExecutor {
+public class OocCommand implements CommandExecutor {
     private final RolePlayBasics plugin;
 
-    public LocalCommand(RolePlayBasics plugin) {
+    public OocCommand(RolePlayBasics plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!sender.hasPermission("roleplaybasics.local")) {
+        if(!sender.hasPermission("roleplaybasics.ooc")) {
             String permMessage = this.plugin.getConfig().getString("permission-message");
 
             if(permMessage != null) {
@@ -33,7 +35,7 @@ public class LocalCommand implements CommandExecutor {
         if (args.length == 0) {
             String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
             if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
-            syntaxMessage = syntaxMessage.replace("%cmd%", "local");
+            syntaxMessage = syntaxMessage.replace("%cmd%", "ooc");
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
             return true;
@@ -50,21 +52,15 @@ public class LocalCommand implements CommandExecutor {
         if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '.';
 
         Player player = (Player) sender;
+        World playerWorld = player.getWorld();
         String playerName = player.getDisplayName();
-        int messageDistance = this.plugin.getConfig().getInt("local-chat-distance");
-        if(messageDistance <= 0) messageDistance = 15;
 
-        String localColor = this.plugin.getConfig().getString("local-message-color");
-        String localDistanceColor = this.plugin.getConfig().getString("local-distance-message-color");
+        String oocColor = this.plugin.getConfig().getString("ooc-message-color");
 
-
-        for(Player nearbyPlayer : player.getWorld().getPlayers()) {
-            if(nearbyPlayer.getLocation().distance(player.getLocation()) <= Math.round((float) messageDistance / 2)) {
-                String color = ChatColor.translateAlternateColorCodes('&', localColor != null ? localColor : "&f");
-                nearbyPlayer.sendMessage(color  + "[L]" + playerName + ": " + color + message);
-            } else if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance){
-                String distanceColor = ChatColor.translateAlternateColorCodes('&', localDistanceColor != null ? localDistanceColor : "&7");
-                nearbyPlayer.sendMessage(distanceColor + "[L]" + playerName + ": "+ distanceColor + message);
+        for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
+            if (onlinePlayer.getWorld().equals(playerWorld)) {
+                String color = ChatColor.translateAlternateColorCodes('&', oocColor != null ? oocColor : "&d");
+                onlinePlayer.sendMessage(color  + "[OOC]" + playerName + ": " + color + message);
             }
         }
         return true;
