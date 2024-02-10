@@ -11,7 +11,7 @@ public final class RolePlayBasics extends JavaPlugin {
     @Override
     public void onEnable() {
         // Enabling Log
-        getLogger().log(Level.INFO, "Role Play Basics is now enabled.");
+        getLogger().log(Level.INFO, "Role Play Basics v" + this.getDescription().getVersion() + " is now enabled.");
 
         // Configs
         saveDefaultConfig();
@@ -25,6 +25,7 @@ public final class RolePlayBasics extends JavaPlugin {
         getCommand("whisper").setExecutor(new WhisperCommand(this));
         getCommand("localooc").setExecutor(new LocalOocCommand(this));
         getCommand("ooc").setExecutor(new OocCommand(this));
+        getCommand("staffchat").setExecutor(new StaffChatCommand(this));
 
         // Tab Completions
         getCommand("roleplaybasics").setTabCompleter(new RpbTabCompletion());
@@ -32,6 +33,6 @@ public final class RolePlayBasics extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().log(Level.INFO, "Role Play Basics is now disabled.");
+        getLogger().log(Level.INFO, "Role Play Basics v" + this.getDescription().getVersion() + " is now disabled.");
     }
 }

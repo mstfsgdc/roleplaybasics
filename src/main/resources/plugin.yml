@@ -42,6 +42,12 @@ commands:
     usage: /<command> <message>
     aliases:
       - b
+  staffchat:
+    description: Sends an chat message to all staffs in the server.
+    usage: /<command> <message>
+    permission: roleplaybasics.staffchat
+    aliases:
+      - sc
 permissions:
   roleplaybasics.me:
     description: Allows the usage of the /me command.
@@ -67,3 +73,6 @@ permissions:
   roleplaybasics.ooc:
     description: Allows the usage of the /ooc command.
     default: true
+  roleplaybasics.staffchat:
+    description: Allows the usage of the /staffchat command and receive staff chat messages.
+    default: op

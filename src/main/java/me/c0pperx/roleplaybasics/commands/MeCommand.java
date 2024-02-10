@@ -2,6 +2,7 @@ package me.c0pperx.roleplaybasics.commands;
 
 import me.c0pperx.roleplaybasics.RolePlayBasics;
 import me.c0pperx.roleplaybasics.functions.CommandHelper;
+import me.c0pperx.roleplaybasics.utilities.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -46,7 +47,8 @@ public class MeCommand implements CommandExecutor {
         String message = messageBuilder.toString().trim();
 
         Player player = (Player) sender;
-        String playerName = ChatColor.BOLD + player.getDisplayName() + ChatColor.RESET + ChatColor.DARK_PURPLE;
+        String rolePlayName = StringUtils.getRolePlayName(player.getDisplayName());
+        String playerName = ChatColor.BOLD + rolePlayName + ChatColor.RESET + ChatColor.DARK_PURPLE;
         int messageDistance = this.plugin.getConfig().getInt("emote-message-distance");
         if(messageDistance <= 0) messageDistance = 30;
 

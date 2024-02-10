@@ -3,22 +3,23 @@ package me.c0pperx.roleplaybasics.commands;
 import me.c0pperx.roleplaybasics.RolePlayBasics;
 import me.c0pperx.roleplaybasics.functions.CommandHelper;
 import me.c0pperx.roleplaybasics.utilities.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class DoCommand implements CommandExecutor {
+public class StaffChatCommand implements CommandExecutor {
     private final RolePlayBasics plugin;
 
-    public DoCommand(RolePlayBasics plugin) {
+    public StaffChatCommand(RolePlayBasics plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!sender.hasPermission("roleplaybasics.do")) {
+        if(!sender.hasPermission("roleplaybasics.staffchat")) {
             String permMessage = this.plugin.getConfig().getString("permission-message");
 
             if(permMessage != null) {
@@ -34,7 +35,7 @@ public class DoCommand implements CommandExecutor {
         if (args.length == 0) {
             String syntaxMessage = this.plugin.getConfig().getString("syntax-message");
             if(syntaxMessage == null || syntaxMessage.isEmpty()) syntaxMessage = "&c[RolePlayBasics]&r Syntax: /%cmd% <message>";
-            syntaxMessage = syntaxMessage.replace("%cmd%", "do");
+            syntaxMessage = syntaxMessage.replace("%cmd%", "staffchat");
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', syntaxMessage));
             return true;
@@ -46,15 +47,20 @@ public class DoCommand implements CommandExecutor {
         }
         String message = messageBuilder.toString().trim();
 
-        Player player = (Player) sender;
-        String rolePlayName = StringUtils.getRolePlayName(player.getDisplayName());
-        String playerName = ChatColor.BOLD + rolePlayName + ChatColor.RESET + ChatColor.DARK_PURPLE;
-        int messageDistance = this.plugin.getConfig().getInt("emote-message-distance");
-        if(messageDistance <= 0) messageDistance = 30;
+        boolean AutoPunctuation = this.plugin.getConfig().getBoolean("auto-punctuation");
+        char lastChar = message.charAt(message.length() - 1);
+        if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '.';
 
-        for(Player nearbyPlayer : player.getWorld().getPlayers()) {
-            if(nearbyPlayer.getLocation().distance(player.getLocation()) <= messageDistance) {
-                nearbyPlayer.sendMessage(ChatColor.DARK_PURPLE + "* " + message + " (" + playerName + ")");
+        Player player = (Player) sender;
+        String playerName = StringUtils.getRolePlayName(player.getDisplayName());
+
+        String staffChatColor = this.plugin.getConfig().getString("staff-chat-message-color");
+
+
+        for(Player staff : Bukkit.getOnlinePlayers()) {
+            if(staff.hasPermission("roleplaybasics.staffchat")) {
+                String color = ChatColor.translateAlternateColorCodes('&', staffChatColor != null ? staffChatColor : "&b");
+                staff.sendMessage(color + "[SC]" + playerName + ": " + color + ChatColor.translateAlternateColorCodes('&', message));
             }
         }
         return true;

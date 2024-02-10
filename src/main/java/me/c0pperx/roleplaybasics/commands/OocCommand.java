@@ -2,6 +2,7 @@ package me.c0pperx.roleplaybasics.commands;
 
 import me.c0pperx.roleplaybasics.RolePlayBasics;
 import me.c0pperx.roleplaybasics.functions.CommandHelper;
+import me.c0pperx.roleplaybasics.utilities.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -53,7 +54,7 @@ public class OocCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         World playerWorld = player.getWorld();
-        String playerName = player.getDisplayName();
+        String playerName = StringUtils.getRolePlayName(player.getDisplayName());
 
         String oocColor = this.plugin.getConfig().getString("ooc-message-color");
 

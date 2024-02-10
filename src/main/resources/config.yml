@@ -7,7 +7,9 @@ emote-message-distance: 15 # blocks
 local-chat-distance: 15 # blocks
 shout-chat-distance: 30 # blocks
 whisper-chat-distance: 3 # blocks
+
 auto-punctuation: true # true/false
+local-chat-mode: false # true/false
 
 # Chat Colors
 local-message-color: "&f"
@@ -18,6 +20,7 @@ whisper-message-color: "&7"
 whisper-distance-message-color: "&8"
 localooc-message-color: "&5"
 ooc-message-color: "&d"
+staff-chat-message-color: "&b"
 
 # Messages
 permission-message: "&c[RolePlayBasics]&r You do not have the necessary permission to use this command."

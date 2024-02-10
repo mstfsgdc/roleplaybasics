@@ -2,6 +2,7 @@ package me.c0pperx.roleplaybasics.commands;
 
 import me.c0pperx.roleplaybasics.RolePlayBasics;
 import me.c0pperx.roleplaybasics.functions.CommandHelper;
+import me.c0pperx.roleplaybasics.utilities.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -52,7 +53,7 @@ public class ShoutCommand implements CommandExecutor {
         if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '!';
 
         Player player = (Player) sender;
-        String playerName = player.getDisplayName();
+        String playerName = StringUtils.getRolePlayName(player.getDisplayName());
         int messageDistance = this.plugin.getConfig().getInt("shout-chat-distance");
         if(messageDistance <= 0) messageDistance = 30;
 
