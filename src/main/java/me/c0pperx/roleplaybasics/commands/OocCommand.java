@@ -48,9 +48,8 @@ public class OocCommand implements CommandExecutor {
         }
         String message = messageBuilder.toString().trim();
 
-        boolean AutoPunctuation = this.plugin.getConfig().getBoolean("auto-punctuation");
-        char lastChar = message.charAt(message.length() - 1);
-        if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '.';
+        boolean textFormatting = this.plugin.getConfig().getBoolean("text-formatting");
+        if(textFormatting) message = StringUtils.textFormat(message, ".");
 
         Player player = (Player) sender;
         World playerWorld = player.getWorld();

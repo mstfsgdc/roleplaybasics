@@ -8,7 +8,7 @@ local-chat-distance: 15 # blocks
 shout-chat-distance: 30 # blocks
 whisper-chat-distance: 3 # blocks
 
-auto-punctuation: true # true/false
+text-formatting: true # true/false
 local-chat-mode: false # true/false
 
 # Chat Colors

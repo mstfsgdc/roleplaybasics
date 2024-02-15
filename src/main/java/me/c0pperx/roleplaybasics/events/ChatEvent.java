@@ -22,9 +22,8 @@ public class ChatEvent implements Listener {
             String playerName = StringUtils.getRolePlayName(player.getDisplayName());
             String message = event.getMessage();
 
-            boolean AutoPunctuation = this.plugin.getConfig().getBoolean("auto-punctuation");
-            char lastChar = message.charAt(message.length() - 1);
-            if(AutoPunctuation && lastChar != '.' && lastChar != ',' && lastChar != '!' && lastChar != '?') message += '.';
+            boolean textFormatting = this.plugin.getConfig().getBoolean("text-formatting");
+            if(textFormatting) message = StringUtils.textFormat(message, ".");
 
             int messageDistance = this.plugin.getConfig().getInt("local-chat-distance");
             if(messageDistance <= 0) messageDistance = 15;

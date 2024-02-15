@@ -2,6 +2,7 @@ package me.c0pperx.roleplaybasics;
 
 import me.c0pperx.roleplaybasics.commands.*;
 import me.c0pperx.roleplaybasics.events.ChatEvent;
+import me.c0pperx.roleplaybasics.events.InvClickEvent;
 import me.c0pperx.roleplaybasics.tabcompletion.RpbTabCompletion;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,7 +34,8 @@ public final class RolePlayBasics extends JavaPlugin {
         getCommand("roleplaybasics").setTabCompleter(new RpbTabCompletion());
 
         // Events
-        Bukkit.getPluginManager().registerEvents(new ChatEvent(this), this);
+        getServer().getPluginManager().registerEvents(new ChatEvent(this), this);
+        getServer().getPluginManager().registerEvents(new InvClickEvent(this), this);
     }
 
     @Override

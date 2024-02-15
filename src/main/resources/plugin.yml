@@ -12,7 +12,7 @@ commands:
     usage: /<command> <message>
   roleplaybasics:
     description: Role Play Basics command.
-    usage: /command <reload>
+    usage: /command
     permission: roleplaybasics.admin
     aliases:
       - rpb
